@@ -1,17 +1,36 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import Form from "./components/form";
+import Logo from "./images/logo.svg";
+import { Helmet } from "react-helmet";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+function App() {
+    return (
+        <>
+            <Helmet htmlAttributes>
+                <link rel="stylesheet" href="//images.kiwi.com/fonts/circular-pro/style.min.css" />
+            </Helmet>
+            <nav className="header">
+                <div className="container">
+                    <img src={Logo} alt="logo"></img>
+                </div>
+            </nav>
+            <body>
+                <div className="container">
+                    <Form />
+                </div>
+            </body>
+            <footer>
+                <div className="container">
+                    <span class="lastline">
+                        Wyre Payments, Inc. is a registered money service business (NMLS ID: 1574869).
+                    </span>
+                    <span>© Wyre, Inc 2013 - 2021. All rights reserved.</span>
+                </div>
+            </footer>
+        </>
+    )
+}
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
