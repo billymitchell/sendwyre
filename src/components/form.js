@@ -16,15 +16,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 let exchangeRate = "Exchange Rate"
 let transactionFee = "Transaction Fee"
 let networkFee = "Network Fee"
-let total = "Total"
-
-
-// let emailState = false;
-// let phoneState = false;
-
-// let selectedCrypto = ""
-// let selectedCurrency = ""
-
 
 
 function SignupForm() {
@@ -33,6 +24,10 @@ function SignupForm() {
     const [phoneState, setPhoneState] = useState(false);
     const [selectedCrypto, setSelectedCrypto] = useState("")
     const [selectedCurrency, setSelectedCurrency] = useState("")
+    const [currencyAmount, setCurrencyAmount] = useState("")
+
+    let total = `${currencyAmount} + ${networkFee} + ${transactionFee}`
+
 
     useEffect(() => {
         console.log("useEffect Called");
@@ -79,7 +74,9 @@ function SignupForm() {
         <>
             <Formik
                 initialValues={{
-                    currencyAmount: "",
+                    // selectedCurrency: selectedCurrency,
+                    // currencyAmount: "",
+                    // selectedCrypto: selectedCrypto,
                     cryptoAmount: "",
                     cryptoAddress: "",
                     cardNumber: "",
@@ -92,8 +89,8 @@ function SignupForm() {
                     city: "",
                     state: "",
                     zip: "",
-                    emailCheckbox: emailState,
-                    phoneCheckbox: phoneState,
+                    // emailCheckbox: emailState,
+                    // phoneCheckbox: phoneState,
                     Authorization: false,
                 }}
                 validationSchema={
@@ -124,7 +121,7 @@ function SignupForm() {
                         zip: Yup.string().required("Required"),
 
                         // Authorization Check
-                        Authorization: Yup.boolean(true).required("Must Authorize")
+                        Authorization: Yup.boolean().required("Must Authorize")
                     })}
                 onSubmit={(values, { setSubmitting }) => {
                     setTimeout(() => {
@@ -148,7 +145,7 @@ function SignupForm() {
                                         className="my-select"
                                         fullWidth
                                         onChange={(currencyEvent) => {
-                                            // console.log(emailCheckboxEvent.target.checked),
+
                                             setSelectedCurrency(currencyEvent.target.value);
                                         }}
                                     >
@@ -164,6 +161,14 @@ function SignupForm() {
                                         name="currencyAmount"
                                         type="number"
                                         component={TextField}
+                                        onChange={(currencyAmountEvent) => {
+
+                                            function onChange() {
+                                                console.log(currencyAmountEvent.target.value)
+                                                setCurrencyAmount(currencyAmountEvent.target.value);
+                                            }
+                                            onChange()
+                                        }}
                                     />
                                 </FormControl>
                             </div>
@@ -177,7 +182,6 @@ function SignupForm() {
                                         as="select"
                                         className="my-select"
                                         onChange={(cryptoEvent) => {
-                                            // console.log(emailCheckboxEvent.target.checked),
                                             setSelectedCrypto(cryptoEvent.target.value);
                                         }}
                                     >
@@ -191,7 +195,6 @@ function SignupForm() {
                                         label={`${selectedCrypto} Amount`}
                                         name="cryptoAmount"
                                         type="number"
-                                        // placeholder="Amount"
                                         component={TextField}
                                     />
 
@@ -205,7 +208,6 @@ function SignupForm() {
                                         className="form-textarea"
                                         name="cryptoAddress"
                                         type="text"
-
                                     />
                                 </FormControl>
                             </div>

@@ -22,10 +22,10 @@ function App() {
             </div>
             <footer>
                 <div className="container">
-                    <span className="lastline">
+                    <p>
                         Wyre Payments, Inc. is a registered money service business (NMLS ID: 1574869).
-                    </span>
-                    <span>© Wyre, Inc 2013 - 2021. All rights reserved.</span>
+                    </p>
+                    <p>© Wyre, Inc 2013 - 2021. All rights reserved.</p>
                 </div>
             </footer>
         </>
