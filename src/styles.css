@@ -84,9 +84,11 @@ footer span {
 }
 
 .MuiList-padding {
-    padding: 8px !important;
+    padding: 5px !important;
 }
-
+.MuiFormLabel-filled {
+    top: 5px !important;
+}
 @font-face {
     font-family: 'Circular Std Book';
     src: url('./fonts/CircularStd-Book.woff2') format('woff2'),
@@ -180,12 +182,15 @@ footer .container {
 
 body {
     margin: 0;
+    overflow-y: scroll;
+    height: auto;
 }
 
 body .container {
     max-width: 60vw;
     width: 100%;
     margin: 0 auto;
+    transition: max-width ease-in-out .5s;
 }
 
 @media only screen and (max-width: 1250px) {
@@ -200,5 +205,9 @@ body .container {
     }
     .grid-small-1 {
         grid-template-columns: 1fr;
+    }
+    h1 {
+        font-size: 34px;
+        margin-bottom: 20px;
     }
   }

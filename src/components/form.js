@@ -1,37 +1,131 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../../src/styles.css"
 
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
 import { TextField } from 'formik-material-ui';
 import { Select } from 'formik-material-ui';
-import { CheckboxWithLabel } from 'formik-material-ui';
+// import { CheckboxWithLabel } from 'formik-material-ui';
 
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 
-let selectedCrypto = "Selected Crypto"
-let selectedCurrency = "Selected Currency"
 let exchangeRate = "Exchange Rate"
 let transactionFee = "Transaction Fee"
 let networkFee = "Network Fee"
 let total = "Total"
 
-const SignupForm = () => {
+
+// let emailState = false;
+// let phoneState = false;
+
+// let selectedCrypto = ""
+// let selectedCurrency = ""
+
+
+
+function SignupForm() {
+
+    const [emailState, setEmailState] = useState(false);
+    const [phoneState, setPhoneState] = useState(false);
+    const [selectedCrypto, setSelectedCrypto] = useState("")
+    const [selectedCurrency, setSelectedCurrency] = useState("")
+
+    useEffect(() => {
+        console.log("useEffect Called");
+    }, [])
+
+    const DisplayEmail = () => {
+        if (emailState === true) {
+            return (
+                <FormControl>
+                    <Field
+                        className="form-textarea"
+                        label="Email"
+                        name="email"
+                        type="email"
+                        component={TextField} />
+                </FormControl>
+            );
+        } else {
+            return (
+                <></>
+            );
+        }
+    }
+    const DisplayPhone = () => {
+        if (phoneState === true) {
+            return (
+                <FormControl>
+                    <Field
+                        className="form-textarea"
+                        label="Phone"
+                        name="phone"
+                        type="phone"
+                        component={TextField} />
+                </FormControl>
+            );
+        } else {
+            return (
+                <></>
+            );
+        }
+    }
+
     return (
         <>
             <Formik
-                initialValues={{ firstName: '', lastName: '', email: '' }}
-                validationSchema={Yup.object({
-                    firstName: Yup.string()
-                        .max(15, 'Must be 15 characters or less')
-                        .required('Required'),
-                    lastName: Yup.string()
-                        .max(20, 'Must be 20 characters or less')
-                        .required('Required'),
-                    email: Yup.string().email('Invalid email address').required('Required'),
-                })}
+                initialValues={{
+                    currencyAmount: "",
+                    cryptoAmount: "",
+                    cryptoAddress: "",
+                    cardNumber: "",
+                    name: "",
+                    expMonth: "",
+                    expYear: "",
+                    cvv: "",
+                    address: "",
+                    addressLine2: "",
+                    city: "",
+                    state: "",
+                    zip: "",
+                    emailCheckbox: emailState,
+                    phoneCheckbox: phoneState,
+                    Authorization: false,
+                }}
+                validationSchema={
+                    Yup.object({
+                        selectedCurrency: Yup.string().required("Required"),
+                        currencyAmount: Yup.number().required("Required").positive("Positive Number Required"),
+                        crypto: Yup.string().required("Required"),
+                        cryptoAmount: Yup.number().required("Required").positive("Positive Number Required"),
+                        cryptoAddress: Yup.string()
+                            .min(26, "Must be at least 26 characters")
+                            .max(35, "Must be less then 35 characters")
+                            .required("Required"),
+
+                        // Card Verification
+                        cardNumber: Yup.string().required("Required"),
+                        name: Yup.string()
+                            .max(30, 'Must be 30 characters or less')
+                            .required("Required"),
+                        expMonth: Yup.string().required("Required"),
+                        expYear: Yup.string().required("Required"),
+                        cvv: Yup.string().required("Required"),
+
+                        // Address Verification
+                        address: Yup.string().required("Required"),
+                        addressLine2: Yup.string().required("Required"),
+                        city: Yup.string().required("Required"),
+                        state: Yup.string().required("Required"),
+                        zip: Yup.string().required("Required"),
+
+                        // Authorization Check
+                        Authorization: Yup.boolean(true).required("Must Authorize")
+                    })}
                 onSubmit={(values, { setSubmitting }) => {
                     setTimeout(() => {
                         alert(JSON.stringify(values, null, 2));
@@ -46,58 +140,61 @@ const SignupForm = () => {
                         <Form>
                             <div className="grid grid-col-1-1 grid-gap-15 grid-small-1">
                                 <FormControl>
-                                    <InputLabel>From Currency</InputLabel>
+                                    <InputLabel>From</InputLabel>
                                     <Field
                                         component={Select}
-                                        name="currency"
+                                        name="selectedCurrency"
                                         as="select"
                                         className="my-select"
                                         fullWidth
+                                        onChange={(currencyEvent) => {
+                                            // console.log(emailCheckboxEvent.target.checked),
+                                            setSelectedCurrency(currencyEvent.target.value);
+                                        }}
                                     >
                                         <option value="USD">United States Dollar</option>
                                         <option value="GBP">Euro</option>
                                     </Field>
-
-                                    <ErrorMessage name="currency" />
                                 </FormControl>
                                 <FormControl>
                                     <Field
                                         fullWidth
                                         className="form-textarea"
                                         label={`${selectedCurrency} Amount`}
-                                        name="currency-amount"
+                                        name="currencyAmount"
                                         type="number"
-                                        placeholder="Amount"
                                         component={TextField}
                                     />
-                                    <ErrorMessage name="currency-amount" />
                                 </FormControl>
                             </div>
                             <div className="grid grid-col-1-1 grid-gap-15 mar-t-10 grid-small-1">
                                 <FormControl>
-                                    <InputLabel>To Crypto</InputLabel>
+                                    <InputLabel>To</InputLabel>
                                     <Field
                                         component={Select}
                                         label=""
-                                        name="crypto"
+                                        name="selectedCrypto"
                                         as="select"
                                         className="my-select"
+                                        onChange={(cryptoEvent) => {
+                                            // console.log(emailCheckboxEvent.target.checked),
+                                            setSelectedCrypto(cryptoEvent.target.value);
+                                        }}
                                     >
                                         <option value="BTC">Bitcoin</option>
                                         <option value="ETH">Ethereum</option>
                                     </Field>
-                                    <ErrorMessage name="crypto" />
                                 </FormControl>
                                 <FormControl>
                                     <Field
                                         className="form-textarea"
                                         label={`${selectedCrypto} Amount`}
-                                        name="crypto-amount"
+                                        name="cryptoAmount"
                                         type="number"
-                                        placeholder="Amount"
+                                        // placeholder="Amount"
                                         component={TextField}
                                     />
-                                    <ErrorMessage name="currency-amount" />
+
                                 </FormControl>
                             </div>
                             <div className="grid mar-t-10">
@@ -106,9 +203,9 @@ const SignupForm = () => {
                                         label={`${selectedCrypto} Wallet Address`}
                                         component={TextField}
                                         className="form-textarea"
-                                        name="crypto-address"
+                                        name="cryptoAddress"
                                         type="text"
-                                        placeholder="Wallet Address"
+
                                     />
                                 </FormControl>
                             </div>
@@ -117,7 +214,9 @@ const SignupForm = () => {
                                     Exchange Rate: {exchangeRate}<br />
                                     Transaction Fee: {transactionFee}<br />
                                     Network Fee: {networkFee}<br />
-                                    <hr></hr>
+                                </p>
+                                <hr />
+                                <p>
                                     <b>Total: {total}</b>
                                 </p>
                             </div>
@@ -127,12 +226,11 @@ const SignupForm = () => {
                                     <Field
                                         label="Card Number"
                                         className="form-textarea"
-                                        name="card-number"
+                                        name="cardNumber"
                                         type="text"
-                                        placeholder="Card Number"
+
                                         component={TextField}
                                     />
-                                    <ErrorMessage name="card-number" />
                                 </FormControl>
                                 <FormControl>
                                     <Field
@@ -140,10 +238,8 @@ const SignupForm = () => {
                                         className="form-textarea"
                                         name="name"
                                         type="text"
-                                        placeholder="Name on card"
                                         component={TextField}
                                     />
-                                    <ErrorMessage name="name" />
                                 </FormControl>
                             </div>
                             <div className="grid grid-col-1-1-1 grid-gap-15 grid-small-1">
@@ -152,7 +248,7 @@ const SignupForm = () => {
                                     <Field
                                         component={Select}
                                         label=""
-                                        name="exp-month"
+                                        name="expMonth"
                                         as="select"
                                         className="my-select"
 
@@ -170,18 +266,16 @@ const SignupForm = () => {
                                         <option value="11">11</option>
                                         <option value="12">12</option>
                                     </Field>
-                                    <ErrorMessage name="exp-month" />
+
                                 </FormControl>
                                 <FormControl>
                                     <InputLabel>Year</InputLabel>
                                     <Field
                                         component={Select}
                                         label=""
-                                        name="exp-year"
+                                        name="expYear"
                                         as="select"
                                         className="my-select"
-                                        placeholder="Year"
-
                                     >
                                         <option value="2021">2021</option>
                                         <option value="2022">2022</option>
@@ -189,7 +283,7 @@ const SignupForm = () => {
                                         <option value="2024">2024</option>
                                         <option value="2025">2025</option>
                                     </Field>
-                                    <ErrorMessage name="exp-year" />
+
                                 </FormControl>
                                 <FormControl>
                                     <Field
@@ -197,11 +291,8 @@ const SignupForm = () => {
                                         label="CVV"
                                         name="cvv"
                                         type="number"
-                                        placeholder="CVV"
                                         component={TextField}
-
                                     />
-                                    <ErrorMessage name="cvv" />
                                 </FormControl>
                             </div>
                             <div className="billing-info">
@@ -212,11 +303,8 @@ const SignupForm = () => {
                                             label="Billing Address Line 1"
                                             name="address"
                                             type="text"
-                                            placeholder="Billing Address Line 1"
                                             component={TextField}
-
                                         />
-                                        <ErrorMessage name="address" />
                                     </FormControl>
                                 </div>
                                 <div className="grid grid-col-1">
@@ -224,12 +312,10 @@ const SignupForm = () => {
                                         <Field
                                             className="form-textarea"
                                             label="Address Line 2"
-                                            name="address-line-2"
+                                            name="addressLine2"
                                             type="text"
-                                            placeholder="Address Line 2"
                                             component={TextField}
                                         />
-                                        <ErrorMessage name="address-line-2" />
                                     </FormControl>
                                 </div>
                                 <div className="grid grid-col-1-1-1 grid-gap-15 grid-small-1">
@@ -239,11 +325,8 @@ const SignupForm = () => {
                                             label="City"
                                             name="city"
                                             type="text"
-                                            placeholder="City"
                                             component={TextField}
-
                                         />
-                                        <ErrorMessage name="city" />
                                     </FormControl>
                                     <FormControl>
                                         <InputLabel>State</InputLabel>
@@ -257,69 +340,60 @@ const SignupForm = () => {
                                             <option value="MD">Maryland</option>
                                             <option value="NY">New York</option>
                                         </Field>
-                                        <ErrorMessage name="state" />
                                     </FormControl>
                                     <FormControl>
                                         <Field
                                             className="form-textarea"
                                             label="Zip Code"
-                                            name="zip-code"
+                                            name="zip"
                                             type="number"
-                                            placeholder="Zip Code"
                                             component={TextField}
-
                                         />
-                                        <ErrorMessage name="zip-code" />
                                     </FormControl>
                                 </div>
                             </div>
-
                             <div className="options">
-                                <FormControl>
-                                    <div className="grid grid-col-1-1 grid-gap-15 grid-small-1">
-                                        <Field
-                                            component={CheckboxWithLabel}
-                                            type="checkbox"
-                                            name="Email"
-                                            Label={{ label: 'Email Receipt' }}
-                                        />
-                                        <Field
-                                            component={CheckboxWithLabel}
-                                            type="checkbox"
-                                            name="Text"
-                                            Label={{ label: 'Text Receipt' }}
-                                        />
-                                    </div>
-                                </FormControl>
+                                <div className="">
+                                    <FormControlLabel control={
+                                        <Checkbox onChange={(emailCheckboxEvent) => {
+                                            // console.log(emailCheckboxEvent.target.checked),
+                                            setEmailState(emailCheckboxEvent.target.checked);
+                                        }}
+
+                                            name="emailCheckbox" />
+                                    } label="Email Receipt" />
+
+                                    <FormControlLabel control={
+                                        <Checkbox onChange={(phoneCheckboxEvent) => {
+                                            // console.log(emailCheckboxEvent.target.checked),
+                                            setPhoneState(phoneCheckboxEvent.target.checked)
+                                        }}
+
+                                            name="textCheckbox" />
+                                    } label="Text Receipt" />
+                                </div>
+                                <div className="optional-inputs grid grid-col-1">
+                                    {DisplayEmail()}
+                                </div>
+                                <div className="optional-inputs grid grid-col-1">
+                                    {DisplayPhone()}
+                                </div>
                             </div>
                             <div className="grid grid-col-1">
-                                <FormControl>
-                                    <Field
-                                        component={CheckboxWithLabel}
-                                        type="checkbox"
-                                        name="acceptedTerms"
-                                        Label={{
-                                            label: <div>
-                                                I authorize Wyre to debit my account indicated for the amount above on today’s date, and I agree to <a href="/">Wyre's terms</a>
-                                            </div>
-                                        }}
-                                    />
-                                </FormControl>
+                                <FormControlLabel control={
+                                    <Checkbox name="Authorization" />
+                                } label={
+                                    <span>
+                                        I authorize Wyre to debit my account indicated for the amount above on today’s date, and I agree to <a href="/">Wyre's terms</a>
+                                    </span>
+                                } />
                             </div>
-
-
                             <button
                                 className="bluebtn"
-                                variant="contained"
-                                color="primary"
                                 type="submit"
-                                disabled={isSubmitting}
-                                onClick={submitForm}
                             >
                                 Submit
-                                    </button>
-
-
+                            </button>
                         </Form>
                     </div>
                 )
@@ -329,4 +403,7 @@ const SignupForm = () => {
     );
 };
 
-export default SignupForm
+export default SignupForm;
+
+
+

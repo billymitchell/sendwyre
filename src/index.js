@@ -15,14 +15,14 @@ function App() {
                     <img src={Logo} alt="logo"></img>
                 </div>
             </nav>
-            <body>
+            <div>
                 <div className="container">
                     <Form />
                 </div>
-            </body>
+            </div>
             <footer>
                 <div className="container">
-                    <span class="lastline">
+                    <span className="lastline">
                         Wyre Payments, Inc. is a registered money service business (NMLS ID: 1574869).
                     </span>
                     <span>© Wyre, Inc 2013 - 2021. All rights reserved.</span>
