@@ -8,7 +8,9 @@ function App() {
     return (
         <>
             <Helmet htmlAttributes>
-                <link rel="stylesheet" href="//images.kiwi.com/fonts/circular-pro/style.min.css" />
+                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous" />
+
+
             </Helmet>
             <nav className="header">
                 <div className="container">
