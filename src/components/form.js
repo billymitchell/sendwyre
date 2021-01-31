@@ -22,9 +22,9 @@ import ETH from "../../node_modules/cryptocurrency-icons/svg/color/eth.svg"
 
 
 function SignupForm() {
-    const [networkFee, setNetworkFee] = useState("Network Fee")
-    const [transactionFee, setTransactionFee] = useState("Transaction Fee")
-    const [exchangeRate, setExchangeRate] = useState("Exchange Rate")
+    // const [networkFee, setNetworkFee] = useState("Network Fee")
+    // const [transactionFee, setTransactionFee] = useState("Transaction Fee")
+    // const [exchangeRate, setExchangeRate] = useState("Exchange Rate")
     const [emailState, setEmailState] = useState(false);
     const [phoneState, setPhoneState] = useState(false);
 
@@ -138,6 +138,7 @@ function SignupForm() {
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 // Todo: on submit send data to sendwyre API
+                // on success, show order received message, send email/text
                 onSubmit={(values, { setSubmitting }) => {
                     setTimeout(() => {
                         alert(JSON.stringify(values, null, 2));
@@ -248,13 +249,14 @@ function SignupForm() {
                             </div>
                             <div className="rate">
                                 <p className="fees">
-                                    Exchange Rate: {exchangeRate}<br />
-                                    Transaction Fee: {transactionFee}<br />
-                                    Network Fee: {networkFee}<br />
+
+                                    Exchange Rate: <br />
+                                    Transaction Fee: <br />
+                                    Network Fee: <br />
                                 </p>
                                 <hr />
                                 <p>
-                                    <b>Total: {values.currencyAmount} + {transactionFee} + {networkFee}</b>
+                                    <b>Total: {values.currencyAmount}</b>
                                 </p>
                             </div>
                             <h3>Payment Information</h3>

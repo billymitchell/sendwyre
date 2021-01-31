@@ -261,3 +261,6 @@ body .container {
     padding-left: 23px;
 }
   
+.Mui-checked {
+    color: var(--primary-color) !important;
+}
