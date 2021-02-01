@@ -35,7 +35,7 @@ function SignupForm() {
     const DisplayEmail = () => {
         if (emailState === true) {
             return (
-                <div className="optional-inputs grid grid-col-1 email">
+                <div className="MenuItemal-inputs grid grid-col-1 email">
                     <FormControl>
                         <Field
                             className="form-textarea"
@@ -55,7 +55,7 @@ function SignupForm() {
     const DisplayPhone = () => {
         if (phoneState === true) {
             return (
-                <div className="optional-inputs grid grid-col-1 phone">
+                <div className="MenuItemal-inputs grid grid-col-1 phone">
                     <FormControl>
                         <Field
                             className="form-textarea"
@@ -293,18 +293,18 @@ function SignupForm() {
                                         error={touched['expMonth'] && !!errors['expMonth']}
 
                                     >
-                                        <option value="01">01</option>
-                                        <option value="02">02</option>
-                                        <option value="03">03</option>
-                                        <option value="04">04</option>
-                                        <option value="05">05</option>
-                                        <option value="06">06</option>
-                                        <option value="07">07</option>
-                                        <option value="08">08</option>
-                                        <option value="09">09</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                        <option value="12">12</option>
+                                        <MenuItem value="01">01</MenuItem>
+                                        <MenuItem value="02">02</MenuItem>
+                                        <MenuItem value="03">03</MenuItem>
+                                        <MenuItem value="04">04</MenuItem>
+                                        <MenuItem value="05">05</MenuItem>
+                                        <MenuItem value="06">06</MenuItem>
+                                        <MenuItem value="07">07</MenuItem>
+                                        <MenuItem value="08">08</MenuItem>
+                                        <MenuItem value="09">09</MenuItem>
+                                        <MenuItem value="10">10</MenuItem>
+                                        <MenuItem value="11">11</MenuItem>
+                                        <MenuItem value="12">12</MenuItem>
                                     </Field>
                                     {
                                         errors.expMonth && touched.expMonth &&
@@ -323,11 +323,11 @@ function SignupForm() {
                                         className="my-select"
                                         error={touched['expYear'] && !!errors['expYear']}
                                     >
-                                        <option value="2021">2021</option>
-                                        <option value="2022">2022</option>
-                                        <option value="2023">2023</option>
-                                        <option value="2024">2024</option>
-                                        <option value="2025">2025</option>
+                                        <MenuItem value="2021">2021</MenuItem>
+                                        <MenuItem value="2022">2022</MenuItem>
+                                        <MenuItem value="2023">2023</MenuItem>
+                                        <MenuItem value="2024">2024</MenuItem>
+                                        <MenuItem value="2025">2025</MenuItem>
                                     </Field>
                                     {
                                         errors.expYear && touched.expYear &&
@@ -389,8 +389,8 @@ function SignupForm() {
                                             className="my-select"
                                             error={touched['state'] && !!errors['state']}
                                         >
-                                            <option value="MD">Maryland</option>
-                                            <option value="NY">New York</option>
+                                            <MenuItem value="MD">Maryland</MenuItem>
+                                            <MenuItem value="NY">New York</MenuItem>
                                         </Field>
                                         {
                                             errors.state && touched.state &&
@@ -410,7 +410,7 @@ function SignupForm() {
                                     </FormControl>
                                 </div>
                             </div>
-                            <div className="options">
+                            <div className="MenuItems">
                                 <div className="">
                                     <FormControlLabel control={
                                         <Checkbox onChange={(emailCheckboxEvent) => {
