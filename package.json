@@ -35,6 +35,9 @@
     },
     "reactstrap-formik": {
       "react": "^17.0.2"
+    },
+    "postcss-safe-parser": {
+      "postcss": "^8.4.0"
     }
   },
   "scripts": {
