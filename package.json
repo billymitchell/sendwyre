@@ -17,8 +17,6 @@
     "formik-material-ui": "^3.0.1",
     "formik-material-ui-lab": "0.0.8",
     "formik-material-ui-pickers": "0.0.12",
-    "postcss": "^8.4.49",
-    "postcss-safe-parser": "^7.0.1",
     "react": "^17.0.1",
     "react-currency-flags": "^0.1.2",
     "react-dom": "^17.0.1",
@@ -27,7 +25,9 @@
     "reactstrap": "^8.10.1",
     "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4",
-    "yup": "^0.32.8"
+    "yup": "^0.32.8",
+    "postcss": "^8.4.16",
+    "postcss-safe-parser": "^6.0.0"
   },
   "overrides": {
     "react-currency-flags": {
