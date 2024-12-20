@@ -13,7 +13,7 @@
     "country-flag-icons": "^1.2.8",
     "cryptocurrency-icons": "^0.17.1",
     "date-fns": "^2.16.1",
-    "formik": "^2.2.6",
+    "formik": "^2.4.6",
     "formik-material-ui": "^3.0.1",
     "formik-material-ui-lab": "0.0.8",
     "formik-material-ui-pickers": "0.0.12",
@@ -22,11 +22,18 @@
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
     "react-scripts": "^5.0.1",
-    "reactstrap": "^8.9.0",
-    "reactstrap-formik": "^1.0.9",
+    "reactstrap": "^8.10.1",
     "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4",
     "yup": "^0.32.8"
+  },
+  "overrides": {
+    "react-currency-flags": {
+      "styled-components": "^5.2.1"
+    },
+    "reactstrap-formik": {
+      "react": "^17.0.2"
+    }
   },
   "scripts": {
     "start": "react-scripts start",
